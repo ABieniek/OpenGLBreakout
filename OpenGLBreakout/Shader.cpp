@@ -9,6 +9,7 @@
 #include "shader.h"
 
 #include <iostream>
+using namespace std;
 
 Shader &Shader::Use()
 {
@@ -20,7 +21,7 @@ void Shader::Compile(const GLchar* vertexSource, const GLchar* fragmentSource, c
 {
 	GLuint sVertex, sFragment, gShader;
 	// Vertex Shader
-	sVertex = glCreateShader(GL_VERTEX_SHADER);
+	sVertex = glCreateShader(GL_VERTEX_SHADER); //@debug here
 	glShaderSource(sVertex, 1, &vertexSource, NULL);
 	glCompileShader(sVertex);
 	checkCompileErrors(sVertex, "VERTEX");

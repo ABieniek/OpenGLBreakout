@@ -15,6 +15,8 @@
 #include "game.h"
 #include "ResourceManager.h"
 
+using namespace std;
+
 // GLFW callback function declarations
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 
@@ -47,7 +49,7 @@ int main(int argc, char *argv[])
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	// Initialize game
-	Breakout.Init();
+	Breakout.Init(); // @debug here
 
 	// DeltaTime variables
 	GLfloat deltaTime = 0.0f;
@@ -62,7 +64,8 @@ int main(int argc, char *argv[])
 		GLfloat currentFrame = glfwGetTime();
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
-		glfwPollEvents();
+
+		glfwPollEvents();		
 
 		//deltaTime = 0.001f;
 		// Manage user input

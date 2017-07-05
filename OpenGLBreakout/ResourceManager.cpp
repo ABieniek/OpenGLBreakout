@@ -11,6 +11,7 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
+using namespace std;
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
@@ -22,7 +23,7 @@ std::map<std::string, Shader>       ResourceManager::Shaders;
 
 Shader ResourceManager::LoadShader(const GLchar *vShaderFile, const GLchar *fShaderFile, const GLchar *gShaderFile, std::string name)
 {
-	Shaders[name] = loadShaderFromFile(vShaderFile, fShaderFile, gShaderFile);
+	Shaders[name] = loadShaderFromFile(vShaderFile, fShaderFile, gShaderFile); // @debug here
 	return Shaders[name];
 }
 
@@ -92,7 +93,7 @@ Shader ResourceManager::loadShaderFromFile(const GLchar *vShaderFile, const GLch
 	const GLchar *gShaderCode = geometryCode.c_str();
 	// 2. Now create shader object from source code
 	Shader shader;
-	shader.Compile(vShaderCode, fShaderCode, gShaderFile != nullptr ? gShaderCode : nullptr);
+	shader.Compile(vShaderCode, fShaderCode, gShaderFile != nullptr ? gShaderCode : nullptr); //@debug here
 	return shader;
 }
 
