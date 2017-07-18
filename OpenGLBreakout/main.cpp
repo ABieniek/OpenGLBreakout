@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
 
 	glewExperimental = GL_TRUE;
 	glewInit();
-	glGetError(); // Call it once to catch glewInit() bug, all other errors are now from our application.
+	cout << glGetError(); // Call it once to catch glewInit() bug, all other errors are now from our application.
 
 	glfwSetKeyCallback(window, key_callback);
 

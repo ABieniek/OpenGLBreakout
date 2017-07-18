@@ -11,7 +11,12 @@
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <vector>
+#include <tuple>
 
+#include "GameLevel.h"
+#include "GameObject.h"
+#include "BallObject.h"
 
 // Represents the current state of the game
 enum GameState {
@@ -19,6 +24,15 @@ enum GameState {
 	GAME_MENU,
 	GAME_WIN
 };
+
+enum Direction {
+	UP,
+	RIGHT,
+	DOWN,
+	LEFT 
+};
+
+typedef std::tuple<GLboolean, Direction, glm::vec2> Collision;
 
 // Game holds all game-related state and functionality.
 // Combines all game-related data into a single class for
@@ -30,6 +44,8 @@ public:
 	GameState              State;
 	GLboolean              Keys[1024];
 	GLuint                 Width, Height;
+	std::vector<GameLevel> Levels;
+	GLuint                 Level;
 	// Constructor/Destructor
 	Game(GLuint width, GLuint height);
 	~Game();
@@ -39,6 +55,13 @@ public:
 	void ProcessInput(GLfloat dt);
 	void Update(GLfloat dt);
 	void Render();
+	GLboolean CheckCollision(GameObject &one, GameObject &two);
+	Collision CheckCollision(BallObject &one, GameObject &two);
+	Direction VectorDirection(glm::vec2 target);
+	void DoCollisions();
+	// reset
+	void ResetLevel();
+	void ResetPlayer();
 };
 
 #endif#pragma once
