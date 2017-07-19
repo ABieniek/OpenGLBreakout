@@ -17,6 +17,11 @@
 #include "GameLevel.h"
 #include "GameObject.h"
 #include "BallObject.h"
+#include "PowerUp.h"
+#include "resourceManager.h"
+#include "SpriteRenderer.h"
+#include "ParticleGenerator.h"
+#include "PostProcessor.h"
 
 // Represents the current state of the game
 enum GameState {
@@ -41,11 +46,12 @@ class Game
 {
 public:
 	// Game state
-	GameState              State;
-	GLboolean              Keys[1024];
-	GLuint                 Width, Height;
-	std::vector<GameLevel> Levels;
-	GLuint                 Level;
+	GameState				State;
+	GLboolean				Keys[1024];
+	GLuint					Width, Height;
+	std::vector<GameLevel>	Levels;
+	GLuint					Level;
+	std::vector<PowerUp>	PowerUps;
 	// Constructor/Destructor
 	Game(GLuint width, GLuint height);
 	~Game();
@@ -59,9 +65,14 @@ public:
 	Collision CheckCollision(BallObject &one, GameObject &two);
 	Direction VectorDirection(glm::vec2 target);
 	void DoCollisions();
+	// powerups
+	void SpawnPowerUps(GameObject &block);
+	void UpdatePowerUps(GLfloat dt);
+	GLboolean IsOtherPowerUpActive(std::vector<PowerUp> &powerUps, std::string type);
+	void ActivatePowerUp(PowerUp &powerUp);
 	// reset
 	void ResetLevel();
 	void ResetPlayer();
 };
 
-#endif#pragma once
+#endif
