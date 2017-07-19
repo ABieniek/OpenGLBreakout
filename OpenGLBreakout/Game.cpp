@@ -9,7 +9,10 @@
 #include "game.h"
 #include <algorithm>
 #include <iostream>
+#include <irrKlang.h>
 using namespace std;
+using namespace irrklang;
+ISoundEngine* SoundEngine = createIrrKlangDevice();
 
 SpriteRenderer *Renderer;
 
@@ -42,6 +45,8 @@ Game::~Game()
 
 void Game::Init()
 {
+	// sound
+	SoundEngine->play2D("Audio/breakout.mp3", GL_TRUE);
 	// Load shaders
 	ResourceManager::LoadShader("Shaders/sprite.vs", "Shaders/sprite.fs", nullptr, "sprite"); // @debug here
 	ResourceManager::LoadShader("Shaders/particle.vs", "Shaders/particle.fs", nullptr, "particle");
@@ -215,11 +220,13 @@ void Game::DoCollisions()
 				// Destroy block if not solid
 				if (!box.IsSolid)
 				{
+					SoundEngine->play2D("Audio/bleep.mp3", GL_FALSE);
 					box.Destroyed = GL_TRUE;
 					this->SpawnPowerUps(box);
 				}
 				else
 				{   // if block is solid, enable shake effect
+					SoundEngine->play2D("Audio/solid.wav", GL_FALSE);
 					ShakeTime = 0.05f;
 					Effects->Shake = GL_TRUE;
 				}
@@ -264,6 +271,7 @@ void Game::DoCollisions()
 
 			if (CheckCollision(*Player, powerUp))
 			{	// Collided with player, now activate powerup
+				SoundEngine->play2D("Audio/powerup.wav", GL_FALSE);
 				ActivatePowerUp(powerUp);
 				powerUp.Destroyed = GL_TRUE;
 				powerUp.Activated = GL_TRUE;
@@ -275,6 +283,7 @@ void Game::DoCollisions()
 	Collision result = CheckCollision(*Ball, *Player);
 	if (!Ball->Stuck && std::get<0>(result))
 	{
+		SoundEngine->play2D("Audio/bleep.wav", GL_FALSE);
 		// Check where it hit the board, and change velocity based on where it hit the board
 		GLfloat centerBoard = Player->Position.x + Player->Size.x / 2;
 		GLfloat distance = (Ball->Position.x + Ball->Radius) - centerBoard;
