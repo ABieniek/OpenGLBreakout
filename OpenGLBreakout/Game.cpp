@@ -9,12 +9,14 @@
 #include "game.h"
 #include <algorithm>
 #include <iostream>
-#include <irrKlang.h>
+#include <sstream>
+
 using namespace std;
 using namespace irrklang;
 ISoundEngine* SoundEngine = createIrrKlangDevice();
 
-SpriteRenderer *Renderer;
+SpriteRenderer* Renderer;
+TextRenderer* Text;
 
 const glm::vec2 PLAYER_SIZE(100, 20);
 const GLfloat PLAYER_VELOCITY(500.0f);
@@ -47,6 +49,9 @@ void Game::Init()
 {
 	// sound
 	SoundEngine->play2D("Audio/breakout.mp3", GL_TRUE);
+	// text rendering
+	Text = new TextRenderer(this->Width, this->Height);
+	Text->Load("fonts/ocraext.TTF", 24);
 	// Load shaders
 	ResourceManager::LoadShader("Shaders/sprite.vs", "Shaders/sprite.fs", nullptr, "sprite"); // @debug here
 	ResourceManager::LoadShader("Shaders/particle.vs", "Shaders/particle.fs", nullptr, "particle");
@@ -116,7 +121,13 @@ void Game::Update(GLfloat dt)
 	// Check loss condition
 	if (Ball->Position.y >= this->Height) // Did ball reach bottom edge?
 	{
-		this->ResetLevel();
+		--this->Lives;
+		// Did the player lose all his lives? : Game over
+		if (this->Lives == 0)
+		{
+			this->ResetLevel();
+			this->State = GAME_MENU;
+		}
 		this->ResetPlayer();
 	}
 }
@@ -172,6 +183,9 @@ void Game::Render()
 			Ball->Draw(*Renderer);
 		Effects->EndRender();
 		Effects->Render(glfwGetTime());
+		// displaying lives
+		stringstream wat; wat << this->Lives;
+		Text->RenderText("Lives:" + wat.str(), 5.0f, 5.0f, 1.0f);
 	}
 }
 
@@ -335,6 +349,7 @@ void Game::ResetLevel()
 		this->Levels[2].Load("levels/three.lvl", this->Width, this->Height * 0.5f);
 	else if (this->Level == 3)
 		this->Levels[3].Load("levels/four.lvl", this->Width, this->Height * 0.5f);
+	this->Lives = 3;
 }
 
 void Game::ResetPlayer()

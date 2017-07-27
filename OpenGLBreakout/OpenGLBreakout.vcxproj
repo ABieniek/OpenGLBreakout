@@ -69,7 +69,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\Alexyo234\Documents\Programming Stuff\C++ Libraries\irrKlang-1.5.0\include;C:\Users\Alexyo234\Documents\Programming Stuff\C++ Libraries\glew-2.0.0\include;C:\Users\Alexyo234\Documents\Programming Stuff\OpenGLBreakout\OpenGLBreakout\glad;C:\Users\Alexyo234\Documents\Programming Stuff\OpenGLBreakout\OpenGLBreakout\KHR;C:\Users\Alexyo234\Documents\Programming Stuff\C++ Libraries\glfw-3.2.1\include;C:\Users\Alexyo234\Documents\Programming Stuff\C++ Libraries\Include Stuff\lib;C:\Users\Alexyo234\Documents\Programming Stuff\C++ Libraries\glm-0.9.8.4;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Program Files %28x86%29\GnuWin32\src\freetype\2.3.5\freetype-2.3.5\include;C:\Users\Alexyo234\Documents\Programming Stuff\C++ Libraries\irrKlang-1.5.0\include;C:\Users\Alexyo234\Documents\Programming Stuff\C++ Libraries\glew-2.0.0\include;C:\Users\Alexyo234\Documents\Programming Stuff\OpenGLBreakout\OpenGLBreakout\glad;C:\Users\Alexyo234\Documents\Programming Stuff\OpenGLBreakout\OpenGLBreakout\KHR;C:\Users\Alexyo234\Documents\Programming Stuff\C++ Libraries\glfw-3.2.1\include;C:\Users\Alexyo234\Documents\Programming Stuff\C++ Libraries\Include Stuff\lib;C:\Users\Alexyo234\Documents\Programming Stuff\C++ Libraries\glm-0.9.8.4;C:\Users\Alexyo234\Documents\Programming Stuff\C++ Libraries\freeglut\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -125,6 +125,7 @@
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />
+    <ClCompile Include="TextRenderer.cpp" />
     <ClCompile Include="Texture2D.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -138,6 +139,7 @@
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="SpriteRenderer.h" />
+    <ClInclude Include="TextRenderer.h" />
     <ClInclude Include="Texture2D.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

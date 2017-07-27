@@ -22,6 +22,10 @@
 #include "SpriteRenderer.h"
 #include "ParticleGenerator.h"
 #include "PostProcessor.h"
+#include <irrKlang.h>
+#include <ft2build.h>
+#include FT_FREETYPE_H  
+#include "TextRenderer.h"
 
 // Represents the current state of the game
 enum GameState {
@@ -51,6 +55,7 @@ public:
 	GLuint					Width, Height;
 	std::vector<GameLevel>	Levels;
 	GLuint					Level;
+	GLuint					Lives;
 	std::vector<PowerUp>	PowerUps;
 	// Constructor/Destructor
 	Game(GLuint width, GLuint height);
